@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PowerUpManager : MonoBehaviour
 {
-    public string buffName;
+    public string managerName;
     public int _maxBuffs;
     public int maxBuffs
     {

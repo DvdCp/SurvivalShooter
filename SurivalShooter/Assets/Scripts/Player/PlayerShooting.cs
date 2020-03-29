@@ -82,6 +82,8 @@ public class PlayerShooting : MonoBehaviour
 
         damageManager = GetComponent<PowerUpManager>();
         fireRateoManager = GetComponent<PowerUpManager>();
+        PowerUpManager[] components = GetComponents<PowerUpManager>();
+        Debug.Log("nome del primo manager "+components[0].managerName);
     }
 
     private void Update()

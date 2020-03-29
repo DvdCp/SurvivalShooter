@@ -1447,7 +1447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce6f743b85b5f422f95e7311e6ab5a14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buffName: FireRateoManager
+  managerName: DamageUpManager
   _maxBuffs: 4
 --- !u!114 &1648530471
 MonoBehaviour:
@@ -1461,7 +1461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce6f743b85b5f422f95e7311e6ab5a14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buffName: DamageBuffManager
+  managerName: RateoUpManager
   _maxBuffs: 3
 --- !u!1 &1778375946
 GameObject:
@@ -2070,7 +2070,8 @@ PrefabInstance:
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 58913903, guid: 354c7ab57e22e40779fce298e0f949ce, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 354c7ab57e22e40779fce298e0f949ce, type: 3}
 --- !u!1 &3650440103992466847 stripped
 GameObject:
@@ -2090,5 +2091,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce6f743b85b5f422f95e7311e6ab5a14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buffName: SpeedBuffManager
+  managerName: SpeedUpManger
   _maxBuffs: 3
