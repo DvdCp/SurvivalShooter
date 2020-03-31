@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FireRateoPowerUp : PowerUpGeneric
 {
-    public int fireRateoBuff;
+    public float fireRateoBuff;
 
     private void Awake()
     {
@@ -16,28 +16,16 @@ public class FireRateoPowerUp : PowerUpGeneric
         PlayerShooting playerStats = player.GetComponentInChildren<PlayerShooting>();
         var manager = playerStats.fireRateoManager;
 
-        if (manager.buffsActivated < manager.maxBuffs)
+        if (manager.canCollectPowerUp())
         {
+            manager.collectPowerUp(this);
             GetComponent<MeshRenderer>().enabled = false;
             GetComponent<Collider>().enabled = false;
-            manager.buffDuration = this.buffDuration;
-
-            if (!manager.isBuffed)
-            {
-                manager.isBuffed = true;
-                playerStats.fireRateo -= fireRateoBuff;
-                manager.buffTimer += buffDuration;
-                manager.buffsActivated++;
-
-            }
-            else
-            {
-                manager.buffTimer += buffDuration;
-                manager.buffsActivated++;
-            }
-
-            manager.buffsActivated--;
+            playerStats.fireRateo = fireRateoBuff;
+            
             Destroy(gameObject);
         }
     }
 }
+
+

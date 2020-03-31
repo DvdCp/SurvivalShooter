@@ -14,6 +14,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PowerUps/SpeedPowerUp.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PowerUps/DamagePowerUp.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Management/PowerUpManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Management/ReloadAlertManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PowerUps/FireRateoPowerUp.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PowerUps/PowerUpGeneric.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/PlayerMovement.cs" root0="FORCE_HIGHLIGHTING" />
@@ -24,8 +25,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Management/PowerUpManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PowerUps/DamagePowerUp.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PowerUps/FireRateoPowerUp.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlayerMovement.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlayerShooting.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PowerUps/PowerUpGeneric.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Management/PowerUpManager.cs" />
       </list>
     </option>
   </component>
@@ -68,6 +73,7 @@
       <option name="presentableId" value="Default" />
       <updated>1585359031603</updated>
       <workItem from="1585359040827" duration="257000" />
+      <workItem from="1585609169937" duration="7827000" />
     </task>
     <servers />
   </component>
@@ -81,10 +87,18 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1585613461087">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738@0.0.1366.738" timestamp="1585613461087" />
   </component>
 </project>

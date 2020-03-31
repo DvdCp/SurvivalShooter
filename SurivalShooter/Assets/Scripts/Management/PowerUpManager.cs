@@ -5,6 +5,7 @@ using UnityEngine;
 public class PowerUpManager : MonoBehaviour
 {
     public string managerName;
+    
     public int _maxBuffs;
     public int maxBuffs
     {
@@ -12,11 +13,11 @@ public class PowerUpManager : MonoBehaviour
         set => _maxBuffs = value;
     }
 
-    private bool _buff;
+    private bool _isBuffed;
     public bool isBuffed
     {
-        get => _buff;
-        set => _buff = value;
+        get => _isBuffed;
+        set => _isBuffed = value;
     }
 
     private int _buffsActivated;
@@ -46,44 +47,53 @@ public class PowerUpManager : MonoBehaviour
         get => _buffDuration;
         set => _buffDuration = value;
     }
-    public void UseBuffs(out bool temp)
+
+    public bool canCollectPowerUp()
+    {
+        if (buffsActivated < maxBuffs)
+            return true;
+        else
+            return false;
+    }
+    
+    public void collectPowerUp(PowerUpGeneric powerUpGeneric)
+    {
+        buffsActivated++; 
+        buffTimer += powerUpGeneric.buffDuration; 
+        isBuffed = true;
+    }
+
+    public void ManageBuffs(out bool isUsing)
     {
         if (isBuffed && buffsActivated >= 1)
         {
-            Debug.Log("X");
+           
             if (buffTimer > 0.0f)
             {
-                Debug.Log("Y");
                 buffTimer -= Time.deltaTime;
-                Debug.Log(buffTimer);
-
-                if (buffTimer % buffDuration == 0)
-                {
-                    Debug.Log("Z");
+                
+                if (buffTimer % buffDuration == 0) // scansione del tempo per un fattore buffDuration.
                     buffsActivated--;
-                }
+                
+                isUsing = true;
+                return;
             }
             else
             {
-                temp = false;
+                isUsing = false;
                 return;
             }
-            Debug.Log("W");
-            temp = true;
-            return;
         }
         else
         {
-            Debug.Log("O");
+            // buffs esauriti. Ripristino valori...
             buffsActivated = 0;
             buffTimer = 0.0f;
             isBuffed = false;
-            temp = false;
+            isUsing = false;
             return;
         }
-
     }
-
 }
 
 

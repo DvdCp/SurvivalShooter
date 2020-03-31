@@ -7,24 +7,29 @@ using UnityEngine.UI;
 
 public class PlayerShooting : MonoBehaviour
 {
-    private const  int GUN_SHOT_DAMAGE = 20;
+    private const  int NORMAL_GUN_SHOT_DAMAGE = 20;
+    private const float NORMAL_FIRE_RATEO = 0.20f;
 
     public Text ammoCount;
     public int gunShootDamage;
-    public float fireRateo = 0.15f;
-    public float range = 100f;
+    public float fireRateo;
+    public float range;
 
     private bool _isReloading;
 
-    public Material normalShot;
-    public Material buffedShot;
-   
+    public Material normalShotMaterial;
+    public Material damageBuffedShotMaterial;
+    public Material fireRateoBuffedShotMaterial;
+    
     private int maxRounds = 30;
     private int _roundsInMag;
     
-    /*Managers per i buffs*/
-    private bool _flag;
-
+    /*--------------------*/
+    /*Buff Managers*/
+    private bool _isDamageBoosted;
+    private bool _isFireRateoBoosted;
+    private PowerUpManager[] _managers;
+    
     private PowerUpManager _fireRateoManager;
     public PowerUpManager fireRateoManager
     {
@@ -63,7 +68,7 @@ public class PlayerShooting : MonoBehaviour
     {
         _shootableMask = LayerMask.GetMask("Shootable");
 
-        gunShootDamage = GUN_SHOT_DAMAGE;
+        gunShootDamage = NORMAL_GUN_SHOT_DAMAGE;
 
         _roundsInMag = maxRounds;
         ammoCount.text = "" + _roundsInMag; 
@@ -80,34 +85,37 @@ public class PlayerShooting : MonoBehaviour
         _gunLight = GetComponent<Light>();
         _anim = GetComponent<Animator>();
 
-        damageManager = GetComponent<PowerUpManager>();
-        fireRateoManager = GetComponent<PowerUpManager>();
-        PowerUpManager[] components = GetComponents<PowerUpManager>();
-        Debug.Log("nome del primo manager "+components[0].managerName);
+        _managers = GetComponents<PowerUpManager>();
+        damageManager = _managers[0];    // primo manager in base all'ordine top-down dell'inspector
+        fireRateoManager = _managers[1]; //secondo manager in base all'ordine top-down dell'inspector
     }
 
     private void Update()
     {
         _timer += Time.deltaTime;
-
-        damageManager.UseBuffs(out _flag);
-        if (_flag)
-        {
-            _gunLine.material = buffedShot;
-        }
+        
+        damageManager.ManageBuffs(out _isDamageBoosted);
+        if (_isDamageBoosted)
+            _gunLine.material = damageBuffedShotMaterial;
         else
-        {
-            gunShootDamage = GUN_SHOT_DAMAGE;
-            _gunLine.material = normalShot;
+            gunShootDamage = NORMAL_GUN_SHOT_DAMAGE;
 
-        }
-
+        fireRateoManager.ManageBuffs(out _isFireRateoBoosted);
+        if (_isFireRateoBoosted)
+            _gunLine.material = fireRateoBuffedShotMaterial;
+        else
+            fireRateo = NORMAL_FIRE_RATEO;
+        
+        //se entrambi i buff sull'arma sono esauriti, rispristina il material del colpo normale (DA TENERE SOTTOCONTROLLO !!!)
+        if (!_isDamageBoosted && !_isFireRateoBoosted)
+            _gunLine.material = normalShotMaterial;
+        
         if(Input.GetButton("Fire1") && _timer >= fireRateo && _roundsInMag > 0 && !_isReloading)
         {
             _timer = 0f;
             Shoot();
         }
-                                                                                  // se il timer è maggiore del fireRateo * effectsDisplayTime (ovvero non si spara), disabilita gli effetti dello sparo precedente
+        // se il timer è maggiore del fireRateo * effectsDisplayTime (ovvero non si spara), disabilita gli effetti dello sparo precedente
         if (_timer >= fireRateo * _effectsDisplayTime)
         {
             DisableEffects(); 
@@ -126,7 +134,7 @@ public class PlayerShooting : MonoBehaviour
     }
 
     private void Shoot()
-    {                                                                           // se il caricatore è vuoto...*click!*
+    { // se il caricatore è vuoto...*click!*
         if( _roundsInMag == 0 )
         {
             _anim.SetBool("isOutOfAmmo", true);
@@ -134,42 +142,41 @@ public class PlayerShooting : MonoBehaviour
             _source.PlayOneShot(_dryGun);
             return;
         }
-
+        // colpo sparato; timer resettato
         _timer = 0f;
         _roundsInMag--;
-        ammoCount.text = "" + _roundsInMag;
-                                                                     // colpo sparato; timer resettato
-
+        ammoCount.text = "" + _roundsInMag; 
         _source.PlayOneShot(_gunShot);
         _gunLight.enabled = true;
 
-                                                                                //reset degli effetti dello sparo precedente ed avvio di quelli dello sparo attuale
+        //reset degli effetti dello sparo precedente ed avvio di quelli dello sparo attuale
         _gunParticles.Stop();
         _gunParticles.Play();
 
-                                                                                //riattivazoine del gunLine e posizionamento dello stesso sulla fine del GunBarrelEnd
+        //riattivazoine del gunLine e posizionamento dello stesso sulla fine del GunBarrelEnd
         _gunLine.enabled = true;
-        _gunLine.SetPosition(0,transform.position);                              // 0 sta per l'indice della posizione da settare (in questo caso l'inizio); controlla l'Inspector
+        _gunLine.SetPosition(0,transform.position);    // 0 sta per l'indice della posizione da settare (in questo caso l'inizio); controlla l'Inspector
 
-                                                                                //tracciamento del colpo partendo dalla fine del GunBarrelEnd e proseguendo dritto
+        //tracciamento del colpo partendo dalla fine del GunBarrelEnd e proseguendo dritto
         _shootRay.origin = transform.position;
         _shootRay.direction = transform.forward;
 
-                                                                                // verifica se il Raycast ha colpito qualcosa partendo dal suo punto di origine,proseguendo in una data direzione(shootRay.origin e shootRay.direction); out shootHit memorizza le info delle collisione(avvenuta o non)
-                                                                                // range è la distanza che può percorrere il colpo; shootableMask è il layer dove si controlla se sono avvenute le collisioni
+        // verifica se il Raycast ha colpito qualcosa partendo dal suo punto di origine,proseguendo in una data direzione(shootRay.origin e shootRay.direction); out shootHit memorizza le info delle collisione(avvenuta o non)
+        // range è la distanza che può percorrere il colpo; shootableMask è il layer dove si controlla se sono avvenute le collisioni
         if(Physics.Raycast(_shootRay, out _shootHit, range, _shootableMask))
         {
-                                                                                // acquisizione del oggetto colpito 
+            // acquisizione del oggetto colpito 
             EnemyHealth enemy = _shootHit.collider.GetComponent<EnemyHealth>();
-                                                                                // se l'oggetto colpito è un enemy, ottieni il suo componente EnemyHealth
+            
+            // se l'oggetto colpito è un enemy, ottieni il suo componente EnemyHealth
             if (enemy != null)
                 enemy.TakeDamage(gunShootDamage, _shootHit.point);
 
-                                                                                // setta la fine del gunLine (colpo sparato) sul punto della collisione con l'enemy
-            _gunLine.SetPosition(1, _shootHit.point);                             // 1 sta per l'indice della posizione da settare (in questo caso la fine); controlla l'Inspector
+                                                                    // setta la fine del gunLine (colpo sparato) sul punto della collisione con l'enemy
+            _gunLine.SetPosition(1, _shootHit.point);       // 1 sta per l'indice della posizione da settare (in questo caso la fine); controlla l'Inspector
         }
 
-                                                                                // se il RayCast non ha colpito niente, la linea tracciata prosegue fino alla fine del range
+        // se il RayCast non ha colpito niente, la linea tracciata prosegue fino alla fine del range
         else 
         {
             _gunLine.SetPosition(1, _shootRay.origin + _shootRay.direction * range);

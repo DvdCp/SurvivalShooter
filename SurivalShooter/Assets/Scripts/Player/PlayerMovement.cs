@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
         float h = Input.GetAxisRaw ("Horizontal");
         float v = Input.GetAxisRaw ("Vertical");
 
-        speedManager.UseBuffs(out _flag);
+        speedManager.ManageBuffs(out _flag);
         if(_flag)
         {
             //

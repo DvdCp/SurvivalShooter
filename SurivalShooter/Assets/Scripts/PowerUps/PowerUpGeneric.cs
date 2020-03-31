@@ -34,5 +34,4 @@ public abstract class PowerUpGeneric : MonoBehaviour
     }
 
     abstract public void PickUp(Collider player);
-
 }
