@@ -17,6 +17,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Management/ReloadAlertManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PowerUps/FireRateoPowerUp.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PowerUps/PowerUpGeneric.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/LeantweenTest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/PlayerMovement.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/PlayerHealth.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/PlayerShooting.cs" root0="FORCE_HIGHLIGHTING" />
@@ -31,6 +32,7 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Player/PlayerShooting.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PowerUps/PowerUpGeneric.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Management/PowerUpManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/LeantweenTest.cs" />
       </list>
     </option>
   </component>
@@ -73,7 +75,8 @@
       <option name="presentableId" value="Default" />
       <updated>1585359031603</updated>
       <workItem from="1585359040827" duration="257000" />
-      <workItem from="1585609169937" duration="7827000" />
+      <workItem from="1585609169937" duration="7869000" />
+      <workItem from="1585958366990" duration="3969000" />
     </task>
     <servers />
   </component>
