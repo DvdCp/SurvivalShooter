@@ -15,27 +15,29 @@ public class SpeedPowerUp : PowerUpGeneric
     {
         PlayerMovement playerStats = player.GetComponentInChildren<PlayerMovement>();
         var manager = playerStats.speedManager;
-       
-        if (manager.buffsActivated < manager.maxBuffs)
-        {      
-            GetComponent<MeshRenderer>().enabled = false;
-            GetComponent<Collider>().enabled = false;
 
-            if (!manager.isBuffed)
-            {
-                manager.isBuffed = true;
-                playerStats.speed += speedBuff;
-                manager.buffTimer += this.buffDuration;
-                manager.buffsActivated++;
-            }
-            else
-            {
-                manager.buffTimer += buffDuration;
-                manager.buffsActivated++;
-            }
+        GetComponent<MeshRenderer>().enabled = false;
+        GetComponent<Collider>().enabled = false;
 
-            Destroy(gameObject);
+        if (!manager.isBuffed)
+        {
+            manager.isBuffed = true;
+            playerStats.speed += speedBuff;
+            manager.buffTimer += this.buffDuration;
+            //manager.buffsActivated++;
         }
+        else
+        {
+            manager.buffTimer += buffDuration;
+            //manager.buffsActivated++;
+        }
+
+        Destroy(gameObject);
+
+        //if (manager.buffsActivated < manager.maxBuffs)
+        //{      
+        //
+        //} 
     }
 
 

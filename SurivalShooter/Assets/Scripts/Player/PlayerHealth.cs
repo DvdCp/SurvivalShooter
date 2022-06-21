@@ -22,7 +22,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Awake()
     {
-        currentHealth = startingHealth;
+        currentHealth = startingHealth -50;
         _playerMovement = GetComponent<PlayerMovement>();
         _anim = GetComponent<Animator>();
         _playerAudio = GetComponent<AudioSource>();

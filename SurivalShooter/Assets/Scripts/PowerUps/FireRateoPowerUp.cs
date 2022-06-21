@@ -16,15 +16,17 @@ public class FireRateoPowerUp : PowerUpGeneric
         PlayerShooting playerStats = player.GetComponentInChildren<PlayerShooting>();
         var manager = playerStats.fireRateoManager;
 
-        if (manager.canCollectPowerUp())
-        {
-            manager.collectPowerUp(this);
-            GetComponent<MeshRenderer>().enabled = false;
-            GetComponent<Collider>().enabled = false;
-            playerStats.fireRateo = fireRateoBuff;
-            
-            Destroy(gameObject);
-        }
+        manager.collectPowerUp(this);
+        GetComponent<MeshRenderer>().enabled = false;
+        GetComponent<Collider>().enabled = false;
+        playerStats.fireRateo = fireRateoBuff;
+
+        Destroy(gameObject);
+
+        //if (manager.canCollectPowerUp())
+        //{
+        //
+        //}
     }
 }
 

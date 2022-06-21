@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,12 +21,12 @@ public class PowerUpManager : MonoBehaviour
         set => _isBuffed = value;
     }
 
-    private int _buffsActivated;
-    public int buffsActivated
-    {
-        get => _buffsActivated;
-        set => _buffsActivated = value;
-    }
+    //private int _buffsActivated;
+    //public int buffsActivated
+    //{
+    //    get => _buffsActivated;
+    //    set => _buffsActivated = value;
+    //}
 
     private float _buffTimer;
     public float buffTimer
@@ -37,7 +38,7 @@ public class PowerUpManager : MonoBehaviour
     private void Awake()
     {
         isBuffed = false;
-        buffsActivated = 0;
+        //buffsActivated = 0;
         buffTimer = 0.0f;
     }
 
@@ -48,46 +49,56 @@ public class PowerUpManager : MonoBehaviour
         set => _buffDuration = value;
     }
 
-    public bool canCollectPowerUp()
-    {
-        if (buffsActivated < maxBuffs)
-            return true;
-        else
-            return false;
-    }
+    //public bool canCollectPowerUp()
+    //{
+    //    if (buffsActivated < maxBuffs)
+    //        return true;
+    //    else
+    //        return false;
+    //}
     
     public void collectPowerUp(PowerUpGeneric powerUpGeneric)
     {
-        buffsActivated++; 
-        buffTimer += powerUpGeneric.buffDuration; 
+        //buffsActivated++;
+        buffDuration = powerUpGeneric.buffDuration;
+        buffTimer = powerUpGeneric.buffDuration; 
         isBuffed = true;
     }
 
     public void ManageBuffs(out bool isUsing)
     {
-        if (isBuffed && buffsActivated >= 1)
+        if (isBuffed && buffTimer > 0.0f)
         {
-           
-            if (buffTimer > 0.0f)
-            {
-                buffTimer -= Time.deltaTime;
-                
-                if (buffTimer % buffDuration == 0) // scansione del tempo per un fattore buffDuration.
-                    buffsActivated--;
-                
-                isUsing = true;
-                return;
-            }
-            else
-            {
-                isUsing = false;
-                return;
-            }
+            buffTimer -= Time.deltaTime; print(buffTimer);
+            isUsing = true;
+
+            return;
+
+            //if (buffTimer > 0.0f)
+            //{
+            //    
+            //
+            //    var remainTime = buffTimer % buffDuration;
+            //    //print($"remain {remainTime}");
+            //    if (remainTime <= 0.0f ) // scansione del tempo per un fattore buffDuration.
+            //    {
+            //        print($"remain {remainTime} and then debuf");
+            //        buffsActivated--;
+            //    }    
+            //    
+            //    isUsing = true;
+            //    return;
+            //}
+            //else
+            //{
+            //    isUsing = false;
+            //    return;
+            //}
         }
         else
         {
             // buffs esauriti. Ripristino valori...
-            buffsActivated = 0;
+            //buffsActivated = 0;
             buffTimer = 0.0f;
             isBuffed = false;
             isUsing = false;

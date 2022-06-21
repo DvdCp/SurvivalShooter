@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1236979015307369446}
   - component: {fileID: 6632104010439336426}
   - component: {fileID: 4885935565235665462}
-  - component: {fileID: 5818429902495989806}
+  - component: {fileID: 76654424}
   m_Layer: 0
   m_Name: FireRateoPowerUp
   m_TagString: Untagged
@@ -27,9 +27,10 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5707724619397837772}
-  m_LocalRotation: {x: 0.3551091, y: 0.65739274, z: 0.027914284, w: 0.664043}
+  m_LocalRotation: {x: 0.3551111, y: 0.6573925, z: 0.027913857, w: 0.6640422}
   m_LocalPosition: {x: -0.77, y: 0.67, z: 0.14043045}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -53,9 +54,12 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -67,6 +71,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -79,6 +84,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &4885935565235665462
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -92,7 +98,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5818429902495989806
+--- !u!114 &76654424
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,9 +107,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5707724619397837772}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 020cb3022a380453bb35e5e0df04a05d, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e1eb65a8da344e8d9593dab9e90851b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buffDuration: 0
-  existTime: 10
-  damageBuff: 25
+  buffDuration: 5
+  existTime: 11000
+  fireRateoBuff: 0.1

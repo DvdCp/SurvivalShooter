@@ -136,7 +136,7 @@ public class PlayerShooting : MonoBehaviour
     }
 
     private void Shoot()
-    {   
+    {
         // se il caricatore è vuoto...*click!*
         if( _roundsInMag == 0 )
         {

@@ -16,15 +16,18 @@ public class DamagePowerUp : PowerUpGeneric
         PlayerShooting playerStats = player.GetComponentInChildren<PlayerShooting>();
         var manager = playerStats.damageManager;
 
-        if (manager.canCollectPowerUp())
-        {
-            manager.collectPowerUp(this);
-            GetComponent<MeshRenderer>().enabled = false;
-            GetComponent<Collider>().enabled = false;
-            playerStats.gunShootDamage += damageBuff; 
-            
-            Destroy(gameObject);
-        }
+        manager.collectPowerUp(this);
+        GetComponent<MeshRenderer>().enabled = false;
+        GetComponent<Collider>().enabled = false;
+        playerStats.gunShootDamage += damageBuff;
+
+        Destroy(gameObject);
+
+        // ! WIP ! Gestione di più power ups contemporaneamente !
+        //if (manager.canCollectPowerUp())
+        //{
+        //
+        //}
         /*
          *else
          * nothing

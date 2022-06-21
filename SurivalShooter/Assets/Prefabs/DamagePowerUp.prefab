@@ -30,6 +30,7 @@ Transform:
   m_LocalRotation: {x: 0.3551091, y: 0.65739274, z: 0.027914284, w: 0.664043}
   m_LocalPosition: {x: -0.77, y: 0.67, z: 0.14043045}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -53,9 +54,12 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -67,6 +71,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -79,6 +84,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &4885935565235665462
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -104,8 +110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 020cb3022a380453bb35e5e0df04a05d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buffTime: 7
+  buffDuration: 7
   existTime: 10
   damageBuff: 25
-  normalGunShot: {fileID: 2100000, guid: 007cd3dce0e6539409edcc484011c877, type: 2}
-  buffedShot: {fileID: 2100000, guid: 7e4e6d16694284323a0a80bcfc445901, type: 2}
