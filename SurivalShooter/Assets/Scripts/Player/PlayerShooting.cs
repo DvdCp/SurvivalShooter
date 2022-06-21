@@ -64,7 +64,7 @@ public class PlayerShooting : MonoBehaviour
     private float _effectsDisplayTime = 0.2f;
 
 
-    private void Awake()      // Awake() può essere considerato una sorta di "Costruttore"
+    private void Awake()      
     {
         _shootableMask = LayerMask.GetMask("Shootable");
 
@@ -76,6 +76,7 @@ public class PlayerShooting : MonoBehaviour
         _gunParticles = GetComponent<ParticleSystem>();
         _gunLine = GetComponent<LineRenderer>();
 
+        // Ottenimento delle clip audio nell'ordine mostrato nell'Inspector
         _audioSources = GetComponents<AudioSource>();
         _source = _audioSources[0];
         _gunShot = _audioSources[0].clip;
@@ -110,7 +111,7 @@ public class PlayerShooting : MonoBehaviour
         if (!_isDamageBoosted && !_isFireRateoBoosted)
             _gunLine.material = normalShotMaterial;
         
-        if(Input.GetButton("Fire1") && _timer >= fireRateo && _roundsInMag > 0 && !_isReloading)
+        if(Input.GetButton("Fire1") && _timer >= fireRateo && _roundsInMag >= 0 && !_isReloading)
         {
             _timer = 0f;
             Shoot();
@@ -127,18 +128,19 @@ public class PlayerShooting : MonoBehaviour
         }
     }
 
-    public void DisableEffects()        // metodo richiamato in PlayerHealth
+    // metodo richiamato in PlayerHealth
+    public void DisableEffects()        
     {
         _gunLine.enabled = false;
         _gunLight.enabled = false;
     }
 
     private void Shoot()
-    { // se il caricatore è vuoto...*click!*
+    {   
+        // se il caricatore è vuoto...*click!*
         if( _roundsInMag == 0 )
         {
             _anim.SetBool("isOutOfAmmo", true);
-
             _source.PlayOneShot(_dryGun);
             return;
         }
@@ -172,7 +174,7 @@ public class PlayerShooting : MonoBehaviour
             if (enemy != null)
                 enemy.TakeDamage(gunShootDamage, _shootHit.point);
 
-                                                                    // setta la fine del gunLine (colpo sparato) sul punto della collisione con l'enemy
+                                                             // setta la fine del gunLine (colpo sparato) sul punto della collisione con l'enemy
             _gunLine.SetPosition(1, _shootHit.point);       // 1 sta per l'indice della posizione da settare (in questo caso la fine); controlla l'Inspector
         }
 
